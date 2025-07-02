@@ -372,8 +372,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8451084788347890300}
+  m_Children: []
   m_Father: {fileID: 7046343506668487880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6263569520848092995
@@ -403,66 +402,3 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 3ac693b59aaacb143bc81c75d0f0f8e1, type: 2}
   avatar: {fileID: 9000000, guid: 7422271d85100e245800fe7958da7995, type: 2}
   movementScript: {fileID: 3429854792654663508}
---- !u!1001 &8269437585342041495
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2777975323127565354}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.252266
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.50000024
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.484726
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-      propertyPath: m_Name
-      value: Strut Walking
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5866666021909216657, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
---- !u!4 &8451084788347890300 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e6f009af4f1201749a0ab27c84cbcc56, type: 3}
-  m_PrefabInstance: {fileID: 8269437585342041495}
-  m_PrefabAsset: {fileID: 0}

@@ -63,6 +63,13 @@ public class BaseMovement : MonoBehaviour
         MovePlayer();
         ApplyJumpPhysics();
     }
+    public float GetSpeed()
+    {
+        Vector3 horizontalVelocity = rb.linearVelocity;
+        horizontalVelocity.y = 0; 
+        return horizontalVelocity.magnitude;
+    }
+
 
     void MovePlayer()
     {

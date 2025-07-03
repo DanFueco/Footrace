@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BaseMovement : MonoBehaviour
@@ -6,10 +7,13 @@ public class BaseMovement : MonoBehaviour
     
     // Ground Movement
     private Rigidbody rb;
-    public float MoveSpeed = 5f;
+    public float CurrentMoveSpeed = 5f;
+
+    private float MoveSpeed;
+
     private float moveHorizontal;
     private float moveForward;
-
+    private int isBoosted;
     // Jumping
     public float jumpForce = 10f;
     public float fallMultiplier = 2.5f; // Multiplies gravity when falling down
@@ -21,10 +25,44 @@ public class BaseMovement : MonoBehaviour
     private float playerHeight;
     private float raycastDistance;
 
+    private Coroutine boostCoroutine;
+
+    public void StartBoost(float speedMultiplier, float boostDuration)
+    {
+
+        if (boostCoroutine != null)
+            StopCoroutine(boostCoroutine);
+
+        boostCoroutine = StartCoroutine(BoostRoutine(speedMultiplier, boostDuration));
+    }
+
+    private IEnumerator BoostRoutine(float speedMultiplier, float boostDuration)
+    {
+        CurrentMoveSpeed = MoveSpeed;
+        CurrentMoveSpeed *= speedMultiplier;
+
+        if(isBoosted == 0)
+            isBoosted = Random.Range(1, 3);
+
+        yield return new WaitForSeconds(boostDuration);
+
+        CurrentMoveSpeed = MoveSpeed;
+        isBoosted = 0;
+
+        boostCoroutine = null;
+    }
+
+    public int IsBoosted()
+    {
+        return isBoosted;
+    }
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        MoveSpeed = CurrentMoveSpeed;
 
         // Set the raycast to be slightly beneath the player's feet
         playerHeight = GetComponent<CapsuleCollider>().height * transform.localScale.y;
@@ -34,7 +72,10 @@ public class BaseMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
+    public float GetOriginalSpeed()
+    {
+        return this.MoveSpeed;
+    }
     void Update()
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
@@ -65,13 +106,29 @@ public class BaseMovement : MonoBehaviour
     }
     public float GetSpeed()
     {
-        Vector3 horizontalVelocity = rb.linearVelocity;
-        horizontalVelocity.y = 0;
+        if (moveForward != 0)
+        {
+            Vector3 horizontalVelocity = rb.linearVelocity;
+            horizontalVelocity.y = 0;
 
-        // Avance ou recul par rapport à l'orientation du personnage
-        float speed = Vector3.Dot(cameraTransform.forward, horizontalVelocity);
+            // Avance ou recul par rapport à l'orientation du personnage
+            float speed = Vector3.Dot(cameraTransform.forward, horizontalVelocity);
 
-        return speed;
+            return speed;
+        }
+        else return 0;
+    }
+
+    public float GetStrafeSpeed()
+    {
+        if (moveHorizontal != 0)
+        {
+            Vector3 horizontalVelocity = rb.linearVelocity;
+            horizontalVelocity.y = 0;
+
+            return Vector3.Dot(cameraTransform.right, horizontalVelocity);
+        }
+        else return 0;
     }
 
 
@@ -90,7 +147,7 @@ public class BaseMovement : MonoBehaviour
         // Mouvement basé sur la caméra
         Vector3 movement = (camRight * moveHorizontal + camForward * moveForward).normalized;
 
-        Vector3 targetVelocity = movement * MoveSpeed;
+        Vector3 targetVelocity = movement * CurrentMoveSpeed;
 
         // Apply movement to the Rigidbody
         Vector3 velocity = rb.linearVelocity;

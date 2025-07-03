@@ -27,7 +27,15 @@ public class AnimationController : MonoBehaviour
 
     void Update()
     {
-        var velocity = movementScript.GetSpeed();
-        child.GetComponent<Animator>().SetFloat("Speed", velocity);
+        var velocityVertical = movementScript.GetSpeed();
+        child.GetComponent<Animator>().SetFloat("Speed", velocityVertical);
+        var velocityHorizontal = movementScript.GetStrafeSpeed();
+        child.GetComponent<Animator>().SetFloat("StrafeSpeed", velocityHorizontal);
+        
+        var isBoosted = movementScript.IsBoosted();
+        if (child.GetComponent<Animator>().GetInteger("IsBoosted") != isBoosted)
+        {
+            child.GetComponent<Animator>().SetInteger("IsBoosted", isBoosted);
+        }
     }
 }

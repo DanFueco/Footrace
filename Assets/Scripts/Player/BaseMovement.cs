@@ -66,15 +66,30 @@ public class BaseMovement : MonoBehaviour
     public float GetSpeed()
     {
         Vector3 horizontalVelocity = rb.linearVelocity;
-        horizontalVelocity.y = 0; 
-        return horizontalVelocity.magnitude;
+        horizontalVelocity.y = 0;
+
+        // Avance ou recul par rapport à l'orientation du personnage
+        float speed = Vector3.Dot(cameraTransform.forward, horizontalVelocity);
+
+        return speed;
     }
 
 
     void MovePlayer()
     {
 
-        Vector3 movement = (transform.right * moveHorizontal + cameraTransform.forward * moveForward).normalized;
+        Vector3 camForward = cameraTransform.forward;
+        Vector3 camRight = cameraTransform.right;
+
+        camForward.y = 0f;
+        camRight.y = 0f;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        // Mouvement basé sur la caméra
+        Vector3 movement = (camRight * moveHorizontal + camForward * moveForward).normalized;
+
         Vector3 targetVelocity = movement * MoveSpeed;
 
         // Apply movement to the Rigidbody
